@@ -7,11 +7,11 @@ namespace FinalProject_MVCapp_SERAFIN.Models
 {
     public class TaxSystemOperationMODEL
     {
-        int operationId;
-        string isin;
-        DateTime purchaseDate;
-        DateTime sellDate;
-        string amount;
-        string description;
+        public int operationId { get; set; }
+        public string isin { get; set; }
+        public DateTime purchaseDate { get; set; }
+        public DateTime sellDate { get; set; }
+        public string amount { get; set; }
+        public string description { get; set; }
     }
 }

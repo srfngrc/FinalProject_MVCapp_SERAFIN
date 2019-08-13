@@ -7,10 +7,10 @@ namespace FinalProject_MVCapp_SERAFIN.Models
 {
     public class TaxSystemUsersMODEL
     {
-        int loginId;
-        string userName;
-        string passWord;
-        string description;
-        string isAdmin;
+        public int loginId { get; set; }
+        public string userName { get; set; }
+        public string passWord { get; set; }
+        public string description { get; set; }
+        public string isAdmin { get; set; }
     }
 }
