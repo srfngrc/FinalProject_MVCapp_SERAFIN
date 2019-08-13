@@ -166,7 +166,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\TaxSystemUsers\TaxSystemUsers_Manage_View.cshtml" />
+    <Content Include="Views\TaxSystemUsers\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
