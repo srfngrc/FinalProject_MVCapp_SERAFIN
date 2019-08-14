@@ -31,7 +31,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemUsers
         public ActionResult Manage()
         {
-            return View(userLogin);
+            List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
+            aa = ReadUsersFromDB();
+            return View(aa);
         }
 
         // GET: TaxSystemUsers/Details/5
@@ -62,26 +64,43 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             }
         }
 
-
-        static void ReadUsers()
+        //  THIS ReadUsersFromDB METHOD SELECTS ALL THE FIELDS FROM logins DATABASE and 
+        //  STORES THEM INTO A LIST OF USERS MODELS
+        static List<TaxSystemUsersMODEL> ReadUsersFromDB()
         {
-            string myConnectionStringSRFN = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
-            string queryString = "SELECT loginId,userName,passWord,description,isAdmin FROM Nutella.Users;";
-            using (var connectionSRFN = new SqlConnection(myConnectionStringSRFN))
+            List<TaxSystemUsersMODEL> myUsers = new List<TaxSystemUsersMODEL>();
+            SqlConnection myConnSRFN = new SqlConnection();
+            try
             {
-                var command = new SqlCommand(queryString, connectionSRFN);
-                connectionSRFN.Open();
-                using (var reader = command.ExecuteReader())
+                myConnSRFN.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+                myConnSRFN.Open();
+
+                string queryString = "SELECT loginId,userName,passWord,description,isAdmin FROM Nutella.logins;";
+                SqlCommand commandSRFN = new SqlCommand(queryString, myConnSRFN);
+
+                SqlDataReader myUsersResults = commandSRFN.ExecuteReader();
+                while (myUsersResults.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine(String.Format("{0}, {1}", reader[0], reader[1]));
-                    }
+                    TaxSystemUsersMODEL newUser = new TaxSystemUsersMODEL();
+                    newUser.loginId = int.Parse(myUsersResults["loginId"].ToString());
+                    newUser.userName = myUsersResults["userName"].ToString();
+                    newUser.passWord = myUsersResults["passWord"].ToString();
+                    newUser.description = myUsersResults["description"].ToString();
+                    newUser.isAdmin = myUsersResults["isAdmin"].ToString();
+                    myUsers.Add(newUser);
                 }
+
             }
+            catch (Exception ex) { }
+            finally
+            {
+                myConnSRFN.Close();
+            }
+            return myUsers;
         }
-            // GET: TaxSystemUsers/Edit/5
-            public ActionResult Edit(int id)
+
+        // GET: TaxSystemUsers/Edit/5
+        public ActionResult Edit(int id)
         {
             if (id == 0)
             {
