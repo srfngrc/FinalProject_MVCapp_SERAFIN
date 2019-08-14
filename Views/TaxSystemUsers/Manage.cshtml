@@ -5,28 +5,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>TaxSystemUsers Management View</h2>
+<h2>Users Management View</h2>
 
-<p>
-   @* @Html.ActionLink("Create New", "Create")*@
-</p>
-<table class="table">
+
+<table class="table table-bordered table-responsive table-hover">
     <tr>
-        <th></th>
+        <th>loginId </th>
+        <th>userName </th>
+        <th>passWord </th>
+        <th>description</th>
+        <th>isAdmin</th>
+        <th>Options</th>
     </tr>
-
-@if (Model != null)
-{
-    foreach (var item in Model)
+    @foreach (var userA in Model)
     {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+        <tr>
+            <td>@userA.loginId</td>
+            <td>@userA.userName</td>
+            <td>@userA.passWord</td>
+            <td>@userA.description</td>
+            <td>@userA.isAdmin</td>
+            <td>
+                @Html.ActionLink("Edit User", "Edit", new { id=userA.loginId }) |
+                @Html.ActionLink("Delete User", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
     }
-}
-
 </table>
+<p>
+    @Html.ActionLink("Create New User", "Create")
+</p>
+
