@@ -27,7 +27,7 @@
             <td>@userA.isAdmin</td>
             <td>
                 @Html.ActionLink("Edit User", "Edit", new { id=userA.loginId }) |
-                @Html.ActionLink("Delete User", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete User", "Delete", new { id=userA.loginId })
             </td>
         </tr>
     }
