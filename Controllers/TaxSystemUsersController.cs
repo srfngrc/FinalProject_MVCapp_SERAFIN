@@ -33,7 +33,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         {
             List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
             aa = ReadUsersFromDB();
-            return View(aa);
+            return View("Manage", aa);
         }
 
         // GET: TaxSystemUsers/Details/5
@@ -153,23 +153,14 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemUsers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            SqlConnection connDeleteGet = new SqlConnection();
+            //abrir aqui la conexion con la BBDD y ejecutar el delete para ese loginId id.
+
+            List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
+            aa = ReadUsersFromDB();
+            //return View("Manage", aa);
+            return RedirectToAction("Manage");
         }
 
-        // POST: TaxSystemUsers/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Manage");
-            }
-            catch 
-            {
-                return View();
-            }
-        }
     }
 }
