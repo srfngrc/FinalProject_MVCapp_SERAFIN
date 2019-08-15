@@ -153,7 +153,33 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemUsers/Delete/5
         public ActionResult Delete(int id)
         {
-            SqlConnection connDeleteGet = new SqlConnection();
+            //string connStringDELETE = "Server=DatabaseSRFN.mssql.somee.com;" +
+            //    "Database=DatabaseSRFN;User Id=serafin;Password = 19771977; ";
+            SqlConnection connDELETEPost = new SqlConnection();
+            connDELETEPost.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+
+            try
+            {
+                connDELETEPost.Open();
+                SqlCommand commDELETEpost = new SqlCommand("DELETE FROM Nutella.logins WHERE loginId = " + id + ";", connDELETEPost);
+                int a = commDELETEpost.ExecuteNonQuery();
+            }
+            catch 
+            {
+
+            }
+            finally
+            {
+                connDELETEPost.Close();
+            }
+
+
+
+
+
+
+
+
             //abrir aqui la conexion con la BBDD y ejecutar el delete para ese loginId id.
 
             List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
