@@ -52,11 +52,31 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            TaxSystemUsersMODEL CreateNewUser = new TaxSystemUsersMODEL();
+            SqlConnection myconnCREATE = new SqlConnection();
 
-                return RedirectToAction("Index");
+            try
+            {  // TODO: Add insert logic here
+                myconnCREATE.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+                myconnCREATE.Open();
+
+                CreateNewUser.userName = collection["userName"];
+                CreateNewUser.passWord = collection["passWord"];
+                CreateNewUser.description = collection["description"];
+                CreateNewUser.isAdmin = collection["isAdmin"];
+
+                //INSERT INTO Contact(ID, FirstName, LastName) VALUES(1, 'serafin', 'g');
+                string queryCREATE = "INSERT INTO Nutella.logins (userName,passWord,description,isAdmin) VALUES ('" +
+                    CreateNewUser.userName + "','" +
+                    CreateNewUser.passWord + "','" +
+                    CreateNewUser.description + "','" +
+                    CreateNewUser.isAdmin + "');";
+
+                SqlCommand commCREATE = new SqlCommand(queryCREATE, myconnCREATE);
+                int numRowsAffected = commCREATE.ExecuteNonQuery();
+                myconnCREATE.Close();
+
+                return RedirectToAction("Manage");
             }
             catch
             {
