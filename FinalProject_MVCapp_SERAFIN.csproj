@@ -169,6 +169,7 @@
     <Content Include="Views\TaxSystemUsers\Manage.cshtml" />
     <Content Include="Views\TaxSystemUsers\Edit.cshtml" />
     <Content Include="Views\TaxSystemUsers\Create.cshtml" />
+    <Content Include="Views\TaxSystemUsers\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -164,9 +164,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Manage");
             }
-            catch
+            catch 
             {
                 return View();
             }
