@@ -111,7 +111,10 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                 }
 
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                return null;
+            }
             finally
             {
                 myConnSRFN.Close();
@@ -122,15 +125,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemUsers/Edit/5
         public ActionResult Edit(int id)
         {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //TaxSystemUsersMODEL userEdited = Nutella.Users.Find(id);
-            //if (userEdited == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            SqlConnection connEDITget = new SqlConnection();
+            connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+
             return View();
         }
 
@@ -153,8 +150,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemUsers/Delete/5
         public ActionResult Delete(int id)
         {
-            //string connStringDELETE = "Server=DatabaseSRFN.mssql.somee.com;" +
-            //    "Database=DatabaseSRFN;User Id=serafin;Password = 19771977; ";
+            //Here I open the connection to the DB and I execute the delete query
             SqlConnection connDELETEPost = new SqlConnection();
             connDELETEPost.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
 
@@ -166,24 +162,16 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             }
             catch 
             {
-
+                return null;
             }
             finally
             {
                 connDELETEPost.Close();
             }
 
+            //After actually deleting that user's row, 
+            //I call the Manage method again to show the updated list of Users or logins
 
-
-
-
-
-
-
-            //abrir aqui la conexion con la BBDD y ejecutar el delete para ese loginId id.
-
-            List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
-            aa = ReadUsersFromDB();
             //return View("Manage", aa);
             return RedirectToAction("Manage");
         }
