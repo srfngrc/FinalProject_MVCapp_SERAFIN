@@ -16,23 +16,23 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         string myConnectionStringSRFN = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
         public TaxSystemUsersController()
         {
-            userLogin = new List<TaxSystemUsersMODEL>()
-            {
-                new TaxSystemUsersMODEL()
-                {loginId=10,userName="Tony1",passWord="1",description="descrip10",isAdmin="yes"},
-                new TaxSystemUsersMODEL()
-                { loginId=11,userName="Tony2",passWord="2",description="descrip11",isAdmin="no"},
-                new TaxSystemUsersMODEL()
-                {loginId=12,userName="Tony3",passWord="3",description="descrip12",isAdmin="no"},
-                new TaxSystemUsersMODEL()
-                {loginId=14,userName="Tony4",passWord="4",description="descrip14",isAdmin="no"},
-            };
+            //userLogin = new List<TaxSystemUsersMODEL>()
+            //{
+            //    new TaxSystemUsersMODEL()
+            //    {loginId=10,userName="Tony1",passWord="1",description="descrip10",isAdmin="yes"},
+            //    new TaxSystemUsersMODEL()
+            //    { loginId=11,userName="Tony2",passWord="2",description="descrip11",isAdmin="no"},
+            //    new TaxSystemUsersMODEL()
+            //    {loginId=12,userName="Tony3",passWord="3",description="descrip12",isAdmin="no"},
+            //    new TaxSystemUsersMODEL()
+            //    {loginId=14,userName="Tony4",passWord="4",description="descrip14",isAdmin="no"},
+            //};
         }
         // GET: TaxSystemUsers
         public ActionResult Manage()
         {
             List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
-            aa = ReadUsersFromDB();
+            aa = ReadAllUsersFromDB();
             return View("Manage", aa);
         }
 
@@ -84,9 +84,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             }
         }
 
-        //  THIS ReadUsersFromDB METHOD SELECTS ALL THE FIELDS FROM logins DATABASE and 
+        //  THIS ReadAllUsersFromDB METHOD SELECTS ALL THE FIELDS FROM logins DATABASE and 
         //  STORES THEM INTO A LIST OF USERS MODELS
-        static List<TaxSystemUsersMODEL> ReadUsersFromDB()
+        static List<TaxSystemUsersMODEL> ReadAllUsersFromDB()
         {
             List<TaxSystemUsersMODEL> myUsers = new List<TaxSystemUsersMODEL>();
             SqlConnection myConnSRFN = new SqlConnection();
@@ -127,6 +127,10 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         {
             SqlConnection connEDITget = new SqlConnection();
             connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+
+
+
+
 
             return View();
         }
