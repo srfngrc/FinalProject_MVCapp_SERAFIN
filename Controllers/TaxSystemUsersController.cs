@@ -29,6 +29,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             //};
         }
         // GET: TaxSystemUsers
+
+
+        //[Route("")]
         public ActionResult Manage()
         {
             List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
@@ -134,10 +137,12 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             {
                 string queryEDITget = "SELECT userName,passWord,description,isAdmin FROM Nutella.logins WHERE loginId=" + id + ";";
                 SqlCommand commandEDITget = new SqlCommand(queryEDITget, connEDITget);
-                
+
                 connEDITget.Open();
                 SqlDataReader UserWeWannaEdit = commandEDITget.ExecuteReader();
 
+                //now I assign the result of the select to the Database to each element of the object
+                //UserToEdit, recently created above
                 while (UserWeWannaEdit.Read())
                 {
                     UserToEdit.userName = UserWeWannaEdit["userName"].ToString();
@@ -163,16 +168,33 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            SqlConnection connEDITpost = new SqlConnection();
+            connEDITpost.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+
+            TaxSystemUsersMODEL ModifiedUserToUpload = new TaxSystemUsersMODEL();
+
             try
             {
-                // TODO: Add update logic here
+                connEDITpost.Open();
+                string queryEDITpost = "UPDATE Nutella.logins SET " +
+                "userName = '" + collection["userName"] + "', " +
+                "passWord = '" + collection["passWord"] + "', " +
+                "description = '" + collection["description"] + "', " +
+                "isAdmin = '" + collection["isAdmin"] + "' " +
+                "WHERE loginId = " + id + ";";
 
-                return RedirectToAction("Index");
+                SqlCommand commandEDITpost = new SqlCommand(queryEDITpost, connEDITpost);
+                commandEDITpost.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return null;
             }
+            finally
+            {
+                connEDITpost.Close();
+            }
+            return RedirectToAction("Manage");
         }
 
         // GET: TaxSystemUsers/Delete/5
@@ -188,7 +210,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                 SqlCommand commDELETEpost = new SqlCommand("DELETE FROM Nutella.logins WHERE loginId = " + id + ";", connDELETEPost);
                 int a = commDELETEpost.ExecuteNonQuery();
             }
-            catch 
+            catch
             {
                 return null;
             }
