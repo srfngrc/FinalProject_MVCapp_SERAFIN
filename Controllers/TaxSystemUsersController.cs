@@ -125,14 +125,38 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemUsers/Edit/5
         public ActionResult Edit(int id)
         {
+            //I configure the connection to the DB
             SqlConnection connEDITget = new SqlConnection();
             connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+            TaxSystemUsersMODEL UserToEdit = new TaxSystemUsersMODEL();
 
+            try
+            {
+                string queryEDITget = "SELECT userName,passWord,description,isAdmin FROM Nutella.logins WHERE loginId=" + id + ";";
+                SqlCommand commandEDITget = new SqlCommand(queryEDITget, connEDITget);
+                
+                connEDITget.Open();
+                SqlDataReader UserWeWannaEdit = commandEDITget.ExecuteReader();
 
+                while (UserWeWannaEdit.Read())
+                {
+                    UserToEdit.userName = UserWeWannaEdit["userName"].ToString();
+                    UserToEdit.passWord = UserWeWannaEdit["passWord"].ToString();
+                    UserToEdit.description = UserWeWannaEdit["description"].ToString();
+                    UserToEdit.isAdmin = UserWeWannaEdit["isAdmin"].ToString();
+                }
 
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                connEDITget.Close();
+            }
 
-
-            return View();
+            return View(UserToEdit);
         }
 
         // POST: TaxSystemUsers/Edit/5
