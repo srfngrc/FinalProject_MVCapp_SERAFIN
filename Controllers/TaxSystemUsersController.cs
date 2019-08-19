@@ -16,17 +16,6 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         string myConnectionStringSRFN = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
         public TaxSystemUsersController()
         {
-            //userLogin = new List<TaxSystemUsersMODEL>()
-            //{
-            //    new TaxSystemUsersMODEL()
-            //    {loginId=10,userName="Tony1",passWord="1",description="descrip10",isAdmin="yes"},
-            //    new TaxSystemUsersMODEL()
-            //    { loginId=11,userName="Tony2",passWord="2",description="descrip11",isAdmin="no"},
-            //    new TaxSystemUsersMODEL()
-            //    {loginId=12,userName="Tony3",passWord="3",description="descrip12",isAdmin="no"},
-            //    new TaxSystemUsersMODEL()
-            //    {loginId=14,userName="Tony4",passWord="4",description="descrip14",isAdmin="no"},
-            //};
         }
         // GET: TaxSystemUsers
 
