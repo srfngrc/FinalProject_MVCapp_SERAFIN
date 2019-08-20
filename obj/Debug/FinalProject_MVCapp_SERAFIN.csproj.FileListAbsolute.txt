@@ -69,8 +69,8 @@ C:\VSRepositories\FinalProject_MVCapp_SERAFIN\bin\System.Web.WebPages.Razor.xml
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\bin\Newtonsoft.Json.xml
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\bin\Antlr3.Runtime.pdb
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\VSRepositories\FinalProject_MVCapp_SERAFIN\obj\Debug\FinalProject_MVCapp_SERAFIN.csprojAssemblyReference.cache
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\obj\Debug\FinalProject_MVCapp_SERAFIN.csproj.CoreCompileInputs.cache
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\obj\Debug\FinalProject_MVCapp_SERAFIN.csproj.CopyComplete
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\obj\Debug\FinalProject_MVCapp_SERAFIN.dll
 C:\VSRepositories\FinalProject_MVCapp_SERAFIN\obj\Debug\FinalProject_MVCapp_SERAFIN.pdb
+C:\VSRepositories\FinalProject_MVCapp_SERAFIN\obj\Debug\FinalProject_MVCapp_SERAFIN.csprojAssemblyReference.cache
