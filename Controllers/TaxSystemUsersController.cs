@@ -23,9 +23,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         //[Route("")]
         public ActionResult Manage()
         {
-            List<TaxSystemUsersMODEL> aa = new List<TaxSystemUsersMODEL>();
-            aa = ReadAllUsersFromDB();
-            return View("Manage", aa);
+            List<TaxSystemUsersMODEL> allUsersListed = new List<TaxSystemUsersMODEL>();
+            allUsersListed = ReadAllUsersFromDB();
+            return View("Manage", allUsersListed);
         }
 
         // GET: TaxSystemUsers/Details/5

@@ -17,7 +17,6 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             List<TaxSystemOperationMODEL> ListOfOperations = new List<TaxSystemOperationMODEL>();
             ListOfOperations = ReadAllOperationsFromDB();
             return View("Manage", ListOfOperations);
-            //return View();
         }
 
         static List<TaxSystemOperationMODEL> ReadAllOperationsFromDB()
