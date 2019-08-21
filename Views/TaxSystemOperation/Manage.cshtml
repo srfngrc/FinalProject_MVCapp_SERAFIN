@@ -53,13 +53,14 @@
                 @Html.DisplayFor(modelItem => item.description)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.operationId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.operationId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.operationId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.operationId })
             </td>
         </tr>
     }
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-
 </table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+

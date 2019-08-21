@@ -93,23 +93,24 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
 
                 newOperation.isin = collection["isin"];
                 newOperation.purchaseDate = Convert.ToDateTime(collection["purchaseDate"].ToString());
+                newOperation.sellDate = Convert.ToDateTime(collection["sellDate"].ToString());
                 //newOperation.sellDate = collection["sellDate"].ToString("YYYY-MM-dd");
                 newOperation.amount = collection["amount"];
                 newOperation.description = collection["description"];
 
-                //string queryCREATE = "INSERT INTO Nutella.operations (isin,purchaseDate,sellDate,amount,description)" +
-                //    " VALUES ('" +
-                //    newOperation.isin + "','" +
-                //    newOperation.purchaseDate + "','" +
-                //    newOperation.sellDate + "','" +
-                //    newOperation.amount + "','" +
-                //    newOperation.description + "');";
+                string queryCREATE = "INSERT INTO Nutella.operations (isin,purchaseDate,sellDate,amount,description)" +
+                    " VALUES ('" +
+                    newOperation.isin + "','" +
+                    newOperation.purchaseDate + "','" +
+                    newOperation.sellDate + "','" +
+                    newOperation.amount + "','" +
+                newOperation.description + "');";
 
                 connCREATEpost.Open();
 
-                //SqlCommand commCREATEpost = new SqlCommand(queryCREATE, connCREATEpost);
-                //int numRowsAffected = commCREATEpost.ExecuteNonQuery();
-                
+                SqlCommand commCREATEpost = new SqlCommand(queryCREATE, connCREATEpost);
+                commCREATEpost.ExecuteNonQuery();
+
                 return RedirectToAction("Manage");
             }
             catch
