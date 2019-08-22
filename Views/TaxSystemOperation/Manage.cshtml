@@ -31,30 +31,31 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var operationA in Model)
     {
         <tr>
-            <td>
+            <td>@operationA.operationId</td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.operationId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => operationA.isin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isin)
+                @Html.DisplayFor(modelItem => operationA.purchaseDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.purchaseDate)
+                @Html.DisplayFor(modelItem => operationA.sellDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.sellDate)
+                @Html.DisplayFor(modelItem => operationA.amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.amount)
+                @Html.DisplayFor(modelItem => operationA.description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.operationId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.operationId })
+                @Html.ActionLink("Edit Operation", "Edit", new { id = operationA.operationId }) |
+                @Html.ActionLink("Delete Operation", "Delete", new { id = operationA.operationId })
             </td>
         </tr>
     }

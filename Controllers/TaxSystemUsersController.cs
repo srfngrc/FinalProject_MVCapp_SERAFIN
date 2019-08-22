@@ -12,7 +12,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
 {
     public class TaxSystemUsersController : Controller
     {
-        private List<TaxSystemUsersMODEL> userLogin;
+        private List<TaxSystemOperationMODEL> userLogin;
         string myConnectionStringSRFN = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
         public TaxSystemUsersController()
         {
@@ -23,7 +23,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         //[Route("")]
         public ActionResult Manage()
         {
-            List<TaxSystemUsersMODEL> allUsersListed = new List<TaxSystemUsersMODEL>();
+            List<TaxSystemOperationMODEL> allUsersListed = new List<TaxSystemOperationMODEL>();
             allUsersListed = ReadAllUsersFromDB();
             return View("Manage", allUsersListed);
         }
@@ -44,7 +44,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            TaxSystemUsersMODEL CreateNewUser = new TaxSystemUsersMODEL();
+            TaxSystemOperationMODEL CreateNewUser = new TaxSystemOperationMODEL();
             SqlConnection myconnCREATE = new SqlConnection();
 
             try
@@ -78,9 +78,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
 
         //  THIS ReadAllUsersFromDB METHOD SELECTS ALL THE FIELDS FROM logins DATABASE and 
         //  STORES THEM INTO A LIST OF USERS MODELS
-        static List<TaxSystemUsersMODEL> ReadAllUsersFromDB()
+        static List<TaxSystemOperationMODEL> ReadAllUsersFromDB()
         {
-            List<TaxSystemUsersMODEL> myUsers = new List<TaxSystemUsersMODEL>();
+            List<TaxSystemOperationMODEL> myUsers = new List<TaxSystemOperationMODEL>();
             SqlConnection myConnSRFN = new SqlConnection();
             try
             {
@@ -93,7 +93,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                 SqlDataReader myUsersResults = commandSRFN.ExecuteReader();
                 while (myUsersResults.Read())
                 {
-                    TaxSystemUsersMODEL newUser = new TaxSystemUsersMODEL();
+                    TaxSystemOperationMODEL newUser = new TaxSystemOperationMODEL();
                     newUser.loginId = int.Parse(myUsersResults["loginId"].ToString());
                     newUser.userName = myUsersResults["userName"].ToString();
                     newUser.passWord = myUsersResults["passWord"].ToString();
@@ -120,7 +120,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             //I configure the connection to the DB
             SqlConnection connEDITget = new SqlConnection();
             connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
-            TaxSystemUsersMODEL UserToEdit = new TaxSystemUsersMODEL();
+            TaxSystemOperationMODEL UserToEdit = new TaxSystemOperationMODEL();
 
             try
             {
@@ -160,7 +160,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
             SqlConnection connEDITpost = new SqlConnection();
             connEDITpost.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
 
-            TaxSystemUsersMODEL ModifiedUserToUpload = new TaxSystemUsersMODEL();
+            TaxSystemOperationMODEL ModifiedUserToUpload = new TaxSystemOperationMODEL();
 
             try
             {

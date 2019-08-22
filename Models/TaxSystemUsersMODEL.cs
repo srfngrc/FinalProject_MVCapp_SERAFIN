@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FinalProject_MVCapp_SERAFIN.Models
 {
-    public class TaxSystemUsersMODEL
+    public class TaxSystemOperationMODEL
     {
         //[Key]
         public int loginId { get; set; }

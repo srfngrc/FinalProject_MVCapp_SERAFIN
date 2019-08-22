@@ -39,19 +39,9 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                     newOperation.isin = myUsersResults["isin"].ToString();
 
                     newOperation.purchaseDate = (DateTime)myUsersResults["purchaseDate"];
-
-                    //DateTime aa = Convert.ToDateTime(myUsersResults["sellDate"]);
-                    //newOperation.sellDate = aa.ToString("yyyy-mm-dd");
                     newOperation.sellDate = Convert.ToDateTime(myUsersResults["sellDate"]);
 
-                    //el mas correcto: el de selldate pero con Tostring("YYYY-MM-dd") al final
-                    //newOperation.sellDate = Convert.ToDateTime(myUsersResults["sellDate"]).ToString("YYYY-MM-dd HH:mm:ss");
-
-                    //newOperation.purchaseDate = Convert.ToDateTime(myUsersResults["purchaseDate"]).ToString("dd/MM/yyyy");
-                    //newOperation.purchaseDate = DateTime.Parse(myUsersResults["purchaseDate"].ToString);
-                    //newOperation.purchaseDate = GetValue<DateTime>(myUsersResults["purchaseDate"]);
-
-                    newOperation.amount = myUsersResults["amount"].ToString();
+                    //the most correct one: the one with selldate but with Tostring("YYYY-MM-dd") at the end                    newOperation.amount = myUsersResults["amount"].ToString();
                     newOperation.description = myUsersResults["description"].ToString();
                     myOperations.Add(newOperation);
                 }
@@ -126,7 +116,41 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemOperation/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            //I configure the connection to the DB
+            SqlConnection connEDITget = new SqlConnection();
+            connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+            TaxSystemOperationMODEL OperationToEdit = new TaxSystemOperationMODEL();
+
+            try
+            {
+                string queryEDITget = "SELECT isin,purchaseDate,sellDate,amount,description FROM Nutella.operations WHERE operationId=" + id + ";";
+                SqlCommand commandEDITget = new SqlCommand(queryEDITget, connEDITget);
+
+                connEDITget.Open();
+                SqlDataReader OperationWeWannaEdit = commandEDITget.ExecuteReader();
+
+                //now I assign the result of the select to the Database to each element of the object
+                //UserToEdit, recently created above
+                while (OperationWeWannaEdit.Read())
+                {
+                    OperationToEdit.isin = OperationWeWannaEdit["isin"].ToString();
+                    OperationToEdit.purchaseDate = Convert.ToDateTime(OperationWeWannaEdit["purchaseDate"]);
+                    OperationToEdit.sellDate = Convert.ToDateTime(OperationWeWannaEdit["sellDate"]);
+                    OperationToEdit.amount = OperationWeWannaEdit["amount"].ToString();
+                    OperationToEdit.description = OperationWeWannaEdit["description"].ToString();
+                }
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                connEDITget.Close();
+            }
+
+            return View(OperationToEdit);
         }
 
         // POST: TaxSystemOperation/Edit/5
@@ -146,21 +170,35 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         // GET: TaxSystemOperation/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+            //Here I open the connection to the DB and I execute the delete query
+            SqlConnection connDELETEPost = new SqlConnection();
+            connDELETEPost.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
 
-        // POST: TaxSystemOperation/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
             try
             {
-                return RedirectToAction("Index");
+                connDELETEPost.Open();
+                SqlCommand commDELETEpost = new SqlCommand("DELETE FROM Nutella.operations WHERE operationId = " + id + ";", connDELETEPost);
+                int a = commDELETEpost.ExecuteNonQuery();
             }
             catch
             {
-                return View();
+                return null;
             }
+            finally
+            {
+                connDELETEPost.Close();
+            }
+            //After actually deleting that operation's row, 
+            //I call the Manage method again to show the updated list of Operations
+
+            return RedirectToAction("Manage");
         }
+
+        //// POST: TaxSystemOperation/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+
+        //}
     }
 }
