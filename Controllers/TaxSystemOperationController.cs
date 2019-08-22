@@ -42,7 +42,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                     newOperation.sellDate = Convert.ToDateTime(myUsersResults["sellDate"]);
 
                     //the most correct one: the one with selldate but with Tostring("YYYY-MM-dd") at the end                    newOperation.amount = myUsersResults["amount"].ToString();
-                    newOperation.description = myUsersResults["description"].ToString();
+                    newOperation.description1 = myUsersResults["description"].ToString();
                     myOperations.Add(newOperation);
                 }
 
@@ -86,7 +86,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                 newOperation.sellDate = Convert.ToDateTime(collection["sellDate"].ToString());
                 //newOperation.sellDate = collection["sellDate"].ToString("YYYY-MM-dd");
                 newOperation.amount = collection["amount"];
-                newOperation.description = collection["description"];
+                newOperation.description1 = collection["description"];
 
                 string queryCREATE = "INSERT INTO Nutella.operations (isin,purchaseDate,sellDate,amount,description)" +
                     " VALUES ('" +
@@ -94,7 +94,7 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
                     newOperation.purchaseDate + "','" +
                     newOperation.sellDate + "','" +
                     newOperation.amount + "','" +
-                newOperation.description + "');";
+                newOperation.description1 + "');";
 
                 connCREATEpost.Open();
 
@@ -114,58 +114,58 @@ namespace FinalProject_MVCapp_SERAFIN.Controllers
         }
 
         // GET: TaxSystemOperation/Edit/5
-        public ActionResult Edit(int id)
-        {
-            //I configure the connection to the DB
-            SqlConnection connEDITget = new SqlConnection();
-            connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
-            TaxSystemOperationMODEL OperationToEdit = new TaxSystemOperationMODEL();
+        //public ActionResult Edit(int id)
+        //{
+        //    //I configure the connection to the DB
+        //    SqlConnection connEDITget = new SqlConnection();
+        //    connEDITget.ConnectionString = ConfigurationManager.ConnectionStrings["SRFNconnection"].ConnectionString;
+        //    TaxSystemOperationMODEL OperationToEdit = new TaxSystemOperationMODEL();
 
-            try
-            {
-                string queryEDITget = "SELECT isin,purchaseDate,sellDate,amount,description FROM Nutella.operations WHERE operationId=" + id + ";";
-                SqlCommand commandEDITget = new SqlCommand(queryEDITget, connEDITget);
+        //    try
+        //    {
+        //        string queryEDITget = "SELECT isin,purchaseDate,sellDate,amount,description FROM Nutella.operations WHERE operationId=" + id + ";";
+        //        SqlCommand commandEDITget = new SqlCommand(queryEDITget, connEDITget);
 
-                connEDITget.Open();
-                SqlDataReader OperationWeWannaEdit = commandEDITget.ExecuteReader();
+        //        connEDITget.Open();
+        //        SqlDataReader OperationWeWannaEdit = commandEDITget.ExecuteReader();
 
-                //now I assign the result of the select to the Database to each element of the object
-                //UserToEdit, recently created above
-                while (OperationWeWannaEdit.Read())
-                {
-                    OperationToEdit.isin = OperationWeWannaEdit["isin"].ToString();
-                    OperationToEdit.purchaseDate = Convert.ToDateTime(OperationWeWannaEdit["purchaseDate"]);
-                    OperationToEdit.sellDate = Convert.ToDateTime(OperationWeWannaEdit["sellDate"]);
-                    OperationToEdit.amount = OperationWeWannaEdit["amount"].ToString();
-                    OperationToEdit.description = OperationWeWannaEdit["description"].ToString();
-                }
+        //        //now I assign the result of the select to the Database to each element of the object
+        //        //UserToEdit, recently created above
+        //        while (OperationWeWannaEdit.Read())
+        //        {
+        //            OperationToEdit.isin = OperationWeWannaEdit["isin"].ToString();
+        //            OperationToEdit.purchaseDate = Convert.ToDateTime(OperationWeWannaEdit["purchaseDate"]);
+        //            OperationToEdit.sellDate = Convert.ToDateTime(OperationWeWannaEdit["sellDate"]);
+        //            OperationToEdit.amount = OperationWeWannaEdit["amount"].ToString();
+        //            OperationToEdit.description1 = OperationWeWannaEdit["description"].ToString();
+        //        }
 
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                connEDITget.Close();
-            }
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        connEDITget.Close();
+        //    }
 
-            return View(OperationToEdit);
-        }
+        //    return View(OperationToEdit);
+        //}
 
-        // POST: TaxSystemOperation/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: TaxSystemOperation/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: TaxSystemOperation/Delete/5
         public ActionResult Delete(int id)

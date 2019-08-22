@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FinalProject_MVCapp_SERAFIN.Models.TaxSystemOperatMODEL>
+
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.operationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.purchaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sellDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.operationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sellDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
